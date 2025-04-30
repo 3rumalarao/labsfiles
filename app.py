@@ -1,6 +1,7 @@
 # app.py
 import os
 from flask import Flask, request, jsonify, render_template
+import traceback # Add this import if you want the full traceback later
 
 # --- NEW: Imports for Certificate Check ---
 import socket
@@ -99,8 +100,14 @@ def get_certificate_expiry(url_string):
          return f"Error: Network error connecting to '{hostname}': {e.strerror}"
     except Exception as e:
         # Catch-all for other unexpected errors
-        print(f"ERROR: Unexpected error checking certificate for {url_string}: {e}")
-        return f"Error: An unexpected error occurred while checking the certificate for '{hostname or url_string}'."
+        # --- MODIFIED FOR BETTER LOGGING ---
+        print(f"ERROR: Unexpected error checking certificate for {url_string}:")
+        print(f"  Exception Type: {type(e).__name__}") # Print the specific exception class name
+        print(f"  Exception Args: {e.args}")         # Print the arguments passed to the exception
+        # Optional: Uncomment the next line for extremely detailed debugging info
+        # traceback.print_exc()
+        # --- END MODIFICATION ---
+        return f"Error: An unexpected error occurred ({type(e).__name__}) while checking the certificate for '{hostname or url_string}'." # Include type in user message
 
 
 @app.route('/')
