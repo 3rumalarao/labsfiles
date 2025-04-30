@@ -2,6 +2,7 @@
 import os
 from flask import Flask, request, jsonify, render_template
 import traceback # Add this import if you want the full traceback later
+import re # Import the regex module
 
 # --- NEW: Imports for Certificate Check ---
 import socket
@@ -116,34 +117,35 @@ def index():
 
 @app.route('/api/chat', methods=['POST'])
 def chat():
-    """Handles chat messages: checks for domain/URL for cert check, otherwise uses Azure OpenAI."""
-    if not request.is_json:
-         return jsonify({"response": "Error: Request must be JSON"}), 400
-
+    if not request.is_json: return jsonify({"response": "Error: Request must be JSON"}), 400
     user_message = request.json.get('message')
-    if not user_message:
-        return jsonify({'response': 'Error: No message received'}), 400
+    if not user_message: return jsonify({'response': 'Error: No message received'}), 400
 
     response_text = None
     input_text = user_message.strip()
 
-    # --- Logic to decide action ---
-    # Basic check: Does it contain a dot and no spaces? Or start with http/https?
-    # More robust regex could be used, but this is a simple heuristic.
-    is_potential_domain = (
-        ( '.' in input_text and ' ' not in input_text and len(input_text) > 3 ) or
-        input_text.lower().startswith(('http://', 'https://'))
-    )
+    # --- Improved Domain/URL Extraction ---
+    # Regex to find http/https URLs or domain-like strings (simple version)
+    # Looks for http(s)://... or something like www.domain.com or domain.tld
+    url_pattern = re.compile(r'(https?://[^\s/$.?#].[^\s]*)|([a-zA-Z0-9-]+\.[a-zA-Z0-9.-]+[a-zA-Z0-9-]\.[a-zA-Z]{2,})')
+    match = url_pattern.search(input_text)
+    domain_to_check = None
 
-    if is_potential_domain:
-        print(f"Input '{input_text}' detected as potential domain/URL. Checking certificate...")
-        response_text = get_certificate_expiry(input_text)
+    if match:
+        # Extract the first matched group that is not None
+        domain_to_check = next((g for g in match.groups() if g is not None), None)
+
+    # --- Logic to decide action ---
+    if domain_to_check:
+        print(f"Potential domain/URL '{domain_to_check}' extracted from input. Checking certificate...")
+        # Pass ONLY the extracted domain/URL to the check function
+        response_text = get_certificate_expiry(domain_to_check)
     else:
-        # Not a domain/URL, treat as a general chat message
-        print(f"Input '{input_text}' not detected as domain. Sending to Azure OpenAI...")
+        # Not a domain/URL detected, treat as a general chat message
+        print(f"Input '{input_text}' not detected as containing domain/URL. Sending to Azure OpenAI...")
         response_text = azure_openai_client.get_chat_response(user_message)
 
-    # Fallback if something went wrong in the logic above
+    # Fallback
     if response_text is None:
         response_text = "Sorry, an internal error occurred processing your request."
 
