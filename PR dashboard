@@ -1,0 +1,207 @@
+Great choice! Let's build **CodePatch AI** with Azure DevOps integration.
+
+---
+
+# 🧠 Product Vision: CodePatch AI for Azure DevOps
+
+**Goal:**
+A developer-focused AI tool that reads Azure DevOps PRs (pull requests), analyzes diffs, and returns:
+
+* 🔍 Human-readable summaries of what changed
+* 🧠 Suggestions for improvements
+* 🔐 Security/code smell detection
+* 📋 Language-specific best practice tips
+
+---
+
+## ✅ Phase 1: Define Scope & Core Features
+
+### Core Features:
+
+1. **PR Diff Analysis**
+
+   * Extract changed files from Azure DevOps PRs
+   * Break down each diff into explainable components
+
+2. **AI-Powered Review Comments**
+
+   * Explain changes in plain English
+   * Suggest improvements (e.g., performance, readability)
+   * Flag potential bugs or vulnerabilities
+
+3. **Inline Commenting via Azure DevOps API**
+
+   * Add comments directly on the PR
+   * Optionally notify the author or team
+
+4. **Configurable Rules (Optional MVP+)**
+
+   * Toggle between strict/lenient modes
+   * Customize per repo/project/team
+
+5. **Self-Hosted or SaaS Plugin**
+
+---
+
+## 🧰 Phase 2: Tech Stack & Tools
+
+| Layer                        | Tools                                                   |
+| ---------------------------- | ------------------------------------------------------- |
+| **Frontend (Dashboard)**     | React.js or Next.js + Tailwind (optional)               |
+| **Backend**                  | FastAPI or Node.js (Express)                            |
+| **AI Model**                 | OpenAI (GPT-4o or GPT-4 Turbo), Azure OpenAI, or Gemini |
+| **Diff Parser**              | `unidiff`, `git diff-parser`, or custom tokenizer       |
+| **Azure DevOps Integration** | REST API (v7.x), OAuth2/Personal Access Tokens          |
+| **Hosting**                  | Azure App Services / Render / Railway                   |
+| **Database (optional)**      | PostgreSQL / Supabase (for logs/configs)                |
+
+---
+
+## 🧑‍💻 Phase 3: Azure DevOps Integration – Step-by-Step
+
+### 🔗 Step 1: Register Your App with Azure DevOps
+
+* Register your app in Azure Portal / Azure DevOps
+* Set up **Personal Access Token (PAT)** or OAuth2
+* Grant scopes:
+
+  * `Code (read/write)`
+  * `Pull Requests`
+  * `Project and team` info
+
+📘 [Docs: Azure DevOps REST API Auth](https://learn.microsoft.com/en-us/azure/devops/integrate/get-started/authentication)
+
+---
+
+### 📤 Step 2: Receive or Trigger PR Events
+
+**Options:**
+
+* **Service Hook** → triggers when a PR is created or updated
+* **Scheduled Polling** → check for new/updated PRs every X mins
+* **Azure Function** → webhooks pointing to FastAPI/Express endpoint
+
+📘 [Docs: Service Hooks](https://learn.microsoft.com/en-us/azure/devops/service-hooks/services/webhooks)
+
+---
+
+### 🔍 Step 3: Extract Diff from PR
+
+Use Azure DevOps REST API:
+
+```http
+GET https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repositoryId}/pullRequests/{pullRequestId}/iterations/{iterationId}/diffs
+```
+
+📘 [Pull Request Diff API](https://learn.microsoft.com/en-us/rest/api/azure/devops/git/diffs?view=azure-devops-rest-7.1)
+
+Process:
+
+* Retrieve added/modified/deleted files
+* Parse line-by-line diff
+* Use `unidiff` or similar lib to generate structured format
+
+---
+
+### 🧠 Step 4: Send Diff to LLM for Analysis
+
+**Prompt Template:**
+
+```text
+You are a senior software engineer. Given the following code diff, explain:
+1. What changed and why
+2. Is this good practice?
+3. Suggest any improvements
+4. Highlight any security/code quality issues
+
+DIFF:
+<Insert file name and unified diff here>
+```
+
+Call OpenAI/Azure OpenAI using SDK or REST.
+
+---
+
+### 🗣 Step 5: Post Comments Back to Azure DevOps
+
+Use:
+
+```http
+POST https://dev.azure.com/{organization}/{project}/_apis/git/repositories/{repoId}/pullRequests/{pullRequestId}/threads?api-version=7.1-preview.1
+```
+
+Post thread with:
+
+* Summary
+* Inline comments at exact line number
+* Reactions (optional)
+
+📘 [Azure DevOps: PR Threads API](https://learn.microsoft.com/en-us/rest/api/azure/devops/git/pull-request-threads)
+
+---
+
+### 🛡️ Step 6: Security / Quality Checks (Optional)
+
+* Use GPT-4 + prompt tuning to detect:
+
+  * SQL injection, XSS, hardcoded secrets
+  * Code smells (nested loops, unclosed resources)
+* Optional: Integrate with Bandit, SonarQube for static analysis
+
+---
+
+### 💾 Step 7: Save Results (Optional MVP+)
+
+Store analysis, feedback, and PR metadata in:
+
+* PostgreSQL / Supabase / Firebase
+* Enable dashboard view, historical reports
+
+---
+
+## 🔮 Phase 4: Add-on Features (Post MVP)
+
+* Multi-language support (Python, JS, Java, C#)
+* Auto-label/tag PRs (e.g., “refactor”, “security”, “feature”)
+* Comment sentiment (friendly vs critical tone)
+* Analytics dashboard for team-level insights
+* Slack/Teams notifications
+
+---
+
+## 🚀 Phase 5: Launch & Hosting
+
+### Deployment Options:
+
+* **SaaS**: Host on Azure App Services or Render (multi-tenant)
+* **Self-hosted**: Docker + Azure VM/container for enterprise customers
+
+### Billing (if SaaS):
+
+* Free Tier → 50 PRs/month
+* Pro Tier → Unlimited PRs, advanced analysis
+* Use Stripe for billing
+
+---
+
+## 🔧 Next Steps for You
+
+| Step | Action                                        |
+| ---- | --------------------------------------------- |
+| ✅ 1  | Finalize name, logo, and branding             |
+| ✅ 2  | Set up Azure DevOps PAT and test API manually |
+| ✅ 3  | Build diff parser module in Python/Node       |
+| ✅ 4  | Integrate OpenAI API with diff prompt         |
+| ✅ 5  | Build PR analysis + comment poster            |
+| ✅ 6  | Optional: Build dashboard in React            |
+| ✅ 7  | Deploy backend to Azure App Service           |
+
+---
+
+Would you like:
+
+* A **sample repo structure**?
+* A **FastAPI backend template** with Azure DevOps + OpenAI integration?
+* Help writing prompt templates or parsing diffs?
+
+Let me know which step to dive deeper into.
