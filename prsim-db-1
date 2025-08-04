@@ -1,0 +1,149 @@
+Perfect — the screenshots show exactly the **side navigation structure** and **overall dark-themed dashboard layout** you want to replicate.
+
+Here’s a **complete set of step-by-step prompts** you can give to **lovable.dev** to recreate your attached UI design in one cohesive, credit-efficient flow — while making it easy for **junior developers** to maintain and extend:
+
+---
+
+## ✅ PROMPT 1 — Navigation Sidebar Structure
+
+> **Prompt:**
+>
+> I want to create a **dark-themed vertical side navigation bar** for a DevOps dashboard targeted at junior developers. The navigation should include these collapsible groups and items, with matching icons:
+>
+> * **Overview** (home icon)
+> * **Pipelines** (branch icon) with:
+>
+>   * Build Pipelines
+>   * Release Pipelines
+>   * Pipeline History
+>   * Pipeline Templates
+> * **Infrastructure** (bar-chart icon) with:
+>
+>   * Servers
+>   * Containers
+> * **Applications** (document icon)
+> * **Environments** (settings icon)
+> * **Security** (warning/lock icon) with:
+>
+>   * SSL Certificates
+>   * Access Control
+> * **Team** (user icon) as a bottom-pinned item
+>
+> Requirements:
+>
+> * Dark mode UI with light text on dark background
+> * Highlight active section with a subtle background or color
+> * Collapsible groups (e.g., clicking “Pipelines” expands/collapses sub-items)
+> * Icons similar to those shown in attached screenshots
+> * Responsive design: collapse sidebar to icons only on small screens
+> * Keep styles simple for junior developers to understand (e.g., Tailwind or minimal CSS-in-JS)
+
+---
+
+## ✅ PROMPT 2 — Dashboard Overview Page Layout
+
+> **Prompt:**
+>
+> I need the **main dashboard page** layout to match the attached screenshots. The design should include:
+>
+> * **Top bar** with:
+>
+>   * Logo or project name (“DevOps Portal”)
+>   * Date range selector (e.g., “Last 24 Hours” or Jul 28 – Aug 4, 2025)
+>   * Refresh button
+>   * Download report button
+>   * Edit layout button
+>   * Notifications/settings icons on the right
+> * **Dashboard Overview header** with subtitle: “Monitor your cloud infrastructure, pipelines, and services at a glance”
+> * **Recent DevOps Activity** section with horizontally scrollable cards showing:
+>
+>   * App name, version, environment badge (e.g., Production/Staging)
+>   * Status (Success/Failed)
+>   * Description text
+>   * Duration, time ago, pipeline link, and version details
+> * **Pipeline Status** section with summary cards for:
+>
+>   * Successful Builds (number + % change)
+>   * Failed Builds (number + % change)
+> * **Application Status** section with:
+>
+>   * Healthy Apps
+>   * Down Apps
+>
+> Requirements:
+>
+> * Dark mode styling matching the sidebar
+> * Card-based layout with rounded corners and subtle shadows
+> * Easy-to-understand code/comments for junior developers
+> * Responsive design: stack sections vertically on mobile
+> * Use Tailwind, Chakra, or a simple CSS solution
+
+---
+
+## ✅ PROMPT 3 — Detailed Monitoring Widgets
+
+> **Prompt:**
+>
+> Add these **detailed monitoring sections** to the same dashboard page:
+>
+> * **SSL Certificates** section with:
+>
+>   * Expired count, expiring soon count, total critical count in summary cards
+>   * Detailed list of certificates: domain name, environment badge (e.g., QA, Staging), expiry date, provider, and a status badge (Expired, X days left)
+> * **Container Status** section with:
+>
+>   * Count of Down and Unhealthy containers
+>   * List of containers with details: name, image, CPU/memory usage, last restart time, and error messages
+> * **Cloud Services Health** section with:
+>
+>   * Count of Healthy, Warning, and Critical services
+>   * Detailed list of cloud instances (e.g., Compute Engine Cluster) with provider, environment badge, region, uptime %, CPU/memory usage, response time, and current health status
+>
+> Requirements:
+>
+> * Match the visual style of the attached images (cards with dark backgrounds, badges for status, readable typography)
+> * Sections should be modular components for reusability
+> * Accessible for screen readers (use ARIA labels)
+> * Maintain consistent spacing/padding across sections
+
+---
+
+## ✅ PROMPT 4 — Cohesive Integration & Final Styling
+
+> **Prompt:**
+>
+> Integrate the navigation sidebar, top bar, dashboard overview sections, and monitoring widgets into a single cohesive **dashboard page**.
+>
+> Requirements:
+>
+> * Ensure sidebar is always visible on large screens; collapses on small screens
+> * Top bar sticks to the top on scroll
+> * Smooth transitions when collapsing/expanding sidebar or sections
+> * All elements should follow the same dark theme with consistent colors, spacing, and typography
+> * Junior developer-friendly code: modular React components with clear file structure (e.g., components/Sidebar, components/TopBar, components/ActivityCards, etc.)
+> * Add a light border or divider between sections for visual separation
+
+---
+
+## 🔥 Optional Prompt if Credits Allow — Polish & Docs
+
+> **Prompt:**
+>
+> Provide final **code cleanup, inline comments, and README documentation** for junior developers explaining:
+>
+> * How to run the dashboard locally
+> * How to customize sections or add new widgets
+> * Where to configure API endpoints for real-time data
+> * Best practices for maintaining and updating the dashboard
+
+---
+
+### 🎨 How These Prompts Match Your Screenshots
+
+✅ Sidebar structure exactly mirrors your first image
+✅ Dark-themed cards, badges, summary boxes match your second and third images
+✅ Widgets for SSL, containers, cloud health align with final images
+
+---
+
+Would you like a combined markdown file or a ready-to-paste lovable.dev prompt file with these?
