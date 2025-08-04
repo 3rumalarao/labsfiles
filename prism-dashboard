@@ -1,0 +1,166 @@
+Absolutely. Acting as your **AI Specialist / Prompt Expert**, I'll guide you in creating **efficient and professional prompts for lovable.dev** to replicate your `Azure Pipeline Pulse` dashboard while optimizing your **20 credits**. Since lovable.dev operates in a **task-based prompt economy**, we must design prompts in **phases** to cover the entire functionality and UI in minimal yet complete interactions.
+
+---
+
+## 🎯 Project Summary for Context
+
+You’ve already created a dashboard named **Azure Pipeline Pulse**:
+
+* 🧭 Purpose: Show health, status, and history of Azure DevOps pipelines.
+* 🧑‍💻 Audience: Junior developers (focus on simplicity, readability, and visual clarity).
+* 🔗 GitHub Repo: [azure-pipeline-pulse](https://github.com/3rumalarao/azure-pipeline-pulse)
+* 🛠️ Tools used: Azure DevOps REST APIs, possibly Python/JS backend, dashboard frontend.
+
+---
+
+## 📐 Strategy
+
+We'll break it into **3 Phases**:
+
+1. **UI Layout & Visual Design** (Prompt 1–2)
+2. **Data Fetching & API Integration** (Prompt 3–4)
+3. **Data Display, UX & Export Features** (Prompt 5–6)
+
+Each prompt will be:
+
+* Self-contained
+* Designed to minimize back-and-forth
+* Clearly mentioning audience, goals, and tech constraints
+
+---
+
+## 🔧 PHASE 1 – UI Layout & Visual Design (Prompt 1–2)
+
+---
+
+### ✅ Prompt 1: *Dashboard Planning and UI Skeleton*
+
+> **Prompt:**
+>
+> I am building a dashboard named **Azure Pipeline Pulse**. The goal is to show the health, duration, success rate, and last run status of Azure DevOps pipelines. The dashboard is targeted at **junior developers** with an emphasis on **clean design, clarity, and interactivity**.
+>
+> Please create a **UI/UX layout** for this dashboard with the following sections:
+>
+> * **Header**: Project name, refresh button
+> * **Global Stats**: Total pipelines, running, failed, success % (using summary cards or badges)
+> * **Pipeline Table/Grid**: Name, status, duration, last run, and link to Azure DevOps pipeline
+> * **Filters**: Date range, pipeline name (search bar)
+>
+> Use a light theme, responsive layout, and include hover tooltips for each column.
+>
+> Output: Full UI skeleton with placeholder components, Tailwind (if CSS is used), or React (preferred for layout).
+
+---
+
+### ✅ Prompt 2: *Visual Theme and Styling*
+
+> **Prompt:**
+>
+> Now apply styling and visual improvements to the layout. Keep it:
+>
+> * **Minimalist**
+> * **Developer-friendly**
+> * Accessible to junior developers
+>
+> Include:
+>
+> * Soft shadows on cards
+> * Muted success/failure icons with tooltip labels
+> * Rounded corners
+> * Spacing for readability
+>
+> Assume usage of TailwindCSS or similar utility-based CSS. Update or enhance the earlier layout if needed.
+
+---
+
+## 🌐 PHASE 2 – Data Fetching & Azure DevOps API Integration (Prompt 3–4)
+
+---
+
+### ✅ Prompt 3: *API Integration with Azure DevOps*
+
+> **Prompt:**
+>
+> Integrate the dashboard with **Azure DevOps REST API** to fetch pipeline data. Assume the user provides:
+>
+> * Organization name
+> * Project name
+> * Personal Access Token (PAT)
+>
+> Required data:
+>
+> * Pipeline names
+> * Status (success/failed/running)
+> * Last run time
+> * Duration
+>
+> Show how to fetch this data via the REST API (using Python or Node preferred), handle auth securely, and return structured JSON data ready for the dashboard frontend. Optimize API calls for performance and avoid hitting rate limits.
+
+---
+
+### ✅ Prompt 4: *Backend API or Serverless Function*
+
+> **Prompt:**
+>
+> Convert the data-fetching logic into a **backend service** (FastAPI or ExpressJS preferred) or **serverless function**.
+>
+> Requirements:
+>
+> * Securely store PAT
+> * Query multiple pipelines concurrently
+> * Return API response in a format matching the frontend (from Prompt 1)
+> * Optional: Include basic error handling and retry logic
+>
+> Keep code modular for future extensions.
+
+---
+
+## 📊 PHASE 3 – Data Display, UX Enhancements & Export (Prompt 5–6)
+
+---
+
+### ✅ Prompt 5: *Displaying Real Data with State Handling*
+
+> **Prompt:**
+>
+> Now connect the frontend to the API backend created earlier. Use fetch or axios to call the backend and populate the dashboard.
+>
+> Requirements:
+>
+> * Loading spinner while data fetches
+> * Error message if fetch fails
+> * Refresh button to manually trigger data refresh
+>
+> Ensure UI updates reactively. Keep it junior-developer friendly with readable code and comments.
+
+---
+
+### ✅ Prompt 6: *Add Export & Accessibility Features*
+
+> **Prompt:**
+>
+> Add these enhancements to the dashboard:
+>
+> * Export to CSV button for pipeline table
+> * Tooltip or icon help for each column
+> * Responsive layout for mobile
+> * Keyboard accessible: tab navigation, screen reader labels
+>
+> Optionally include:
+>
+> * Status color coding (green for success, red for failed)
+> * Time formatting (e.g., “5 mins ago”, not raw timestamp)
+>
+> Output full updated frontend code (or describe where changes go).
+
+---
+
+## 🧠 Final Notes
+
+* If you’re low on credits, you can **combine Prompts 1 & 2**, or **5 & 6** to save one request.
+* You can mention:
+  “This is a continuation of a dashboard I already created at [https://lovable.dev/projects/92335b64-4f23-4b0b-bad4-931ab540a28e](https://lovable.dev/projects/92335b64-4f23-4b0b-bad4-931ab540a28e). Reuse components where applicable.”
+
+---
+
+Would you like me to generate **a markdown .txt file** of all these prompts together for easy copying, or want me to prepare versioned GitHub commits from these prompts next?
